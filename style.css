@@ -1,0 +1,190 @@
+:root {
+    --google-blue: #1a73e8;
+    --google-blue-hover: #1557b0;
+    --text-dark: #202124;
+    --text-muted: #5f6368;
+    --border-gray: #dadce0;
+    --bg-light: #f8f9fa;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", RobotoDraft, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Identical Google Card Architecture */
+.google-card {
+    background: #ffffff;
+    border: 1px solid var(--border-gray);
+    border-radius: 8px;
+    width: 450px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.1s ease, left 0.1s ease, top 0.1s ease;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: 24px;
+}
+
+/* Form Styles mimicking user screenshot layout */
+.terms-container {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #3c4043;
+    line-height: 1.4;
+}
+
+.checkbox-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    cursor: pointer;
+}
+
+.notice-text {
+    font-size: 13px;
+    color: var(--text-dark);
+    margin: 16px 0;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid var(--border-gray);
+    margin: 20px 0;
+}
+
+/* Red outline box highlighting original requested element */
+.highlight-box {
+    border: 2px solid transparent;
+    padding: 4px;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+/* Layout Button actions styling */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+}
+
+button {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-cancel {
+    background: transparent;
+    color: var(--google-blue);
+}
+
+.btn-cancel:hover {
+    background-color: rgba(26, 115, 232, 0.04);
+}
+
+.btn-submit {
+    background-color: var(--google-blue);
+    color: #ffffff;
+}
+
+.btn-submit:hover {
+    background-color: var(--google-blue-hover);
+}
+
+/* Runaway state styles applied via JS */
+.runaway-node {
+    position: fixed !important;
+    z-index: 99999;
+}
+
+/* Success Card Satire Screen Layout */
+.hidden {
+    display: none !important;
+}
+
+.success-icon {
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.satirical-feed {
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-gray);
+    border-radius: 6px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.feed-item {
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+.feed-item:last-child {
+    margin-bottom: 0;
+}
+
+.feed-item strong {
+    color: var(--text-dark);
+}
+
+.feed-item span {
+    color: var(--text-muted);
+}
