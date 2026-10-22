@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Navigation elements
     const stepEmail = document.getElementById('step-email');
     const stepTerms = document.getElementById('step-terms');
     const googleCard = document.getElementById('google-card');
     const successCard = document.getElementById('success-card');
+    
+    // Buttons & Inputs
     const btnNext = document.getElementById('btn-next');
     const btnSubmit = document.getElementById('btn-submit');
     const inputEmail = document.getElementById('input-email');
@@ -28,15 +31,26 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const captchaChallenges = [
-        { prompt: "squares with BUGS", matchIndex: [1, 3, 5, 10] },
-        { prompt: "MISSING SEMICOLONS (;)", matchIndex: [2, 4, 7, 8] },
-        { prompt: "LEGACY STACKOVERFLOW CODE", matchIndex: [0, 6, 9, 11] }
+        { prompt: "squares with BUGS" },
+        { prompt: "MISSING SEMICOLONS (;)" },
+        { prompt: "LEGACY STACKOVERFLOW CODE" }
     ];
 
-    // STEP 1: Identification Trigger
+    // STEP 1: Fixed Identification Trigger Transition
     btnNext.addEventListener('click', (e) => {
         e.preventDefault();
-        userEmailDisplay.textContent = inputEmail.value || "anonymous@gmail.com";
+        
+        // Basic check if email input has content
+        if (!inputEmail.value || !inputEmail.checkValidity()) {
+            inputEmail.style.borderColor = "#f85149";
+            inputEmail.focus();
+            return; // Stops transition if it's completely invalid
+        }
+        
+        // Pass email text downstream to victory card feed screen
+        userEmailDisplay.textContent = inputEmail.value;
+
+        // Switch panel visibility states smoothly
         stepEmail.classList.add('hidden');
         stepTerms.classList.remove('hidden');
         loadCaptchaChallenge();
@@ -65,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // CAPTCHA Validation click response loop
-    btnCaptchaVerify.addEventListener('click', () => {
-        const selectedSquares = document.querySelectorAll('.captcha-square.selected');
+    btnCaptchaVerify.addEventListener('click', (e) => {
+        e.preventDefault();
         
         // Anti-human prank rule: Even if they click right, we advance stage until 3 checks pass
         if (currentStage < 2) {
@@ -80,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /**
-     * Evasive position calculation engine engine preventing interface cursor selection
+     * Evasive position calculation engine preventing interface cursor selection
      */
     const makeElementRunaway = (element) => {
         if (!element.classList.contains('runaway-node')) {
