@@ -1,258 +1,190 @@
-/* GitHub Dark Mode Color Palette Variables */
 :root {
-    --bg-main: #0d1117;
-    --bg-header: #161b22;
-    --bg-card: #21262d;
-    --border-color: #30363d;
-    --text-main: #e6edf3;
-    --text-muted: #7d8590;
-    --btn-primary-bg: #238636;
-    --btn-primary-hover: #2ea043;
-    --btn-secondary-bg: #21262d;
-    --accent-blue: #2f81f7;
+    --google-blue: #1a73e8;
+    --google-blue-hover: #1557b0;
+    --text-dark: #202124;
+    --text-muted: #5f6368;
+    --border-gray: #dadce0;
+    --bg-light: #f8f9fa;
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-family: "Roboto", RobotoDraft, Helvetica, Arial, sans-serif;
 }
 
 body {
-    background-color: var(--bg-main);
-    color: var(--text-main);
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
-/* Header / Navbar Layout */
-.gh-header {
-    background-color: var(--bg-header);
-    border-bottom: 1px solid var(--border-color);
-    padding: 16px 32px;
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Identical Google Card Architecture */
+.google-card {
+    background: #ffffff;
+    border: 1px solid var(--border-gray);
+    border-radius: 8px;
+    width: 450px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.1s ease, left 0.1s ease, top 0.1s ease;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: 24px;
+}
+
+/* Form Styles mimicking user screenshot layout */
+.terms-container {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #3c4043;
+    line-height: 1.4;
+}
+
+.checkbox-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    cursor: pointer;
+}
+
+.notice-text {
+    font-size: 13px;
+    color: var(--text-dark);
+    margin: 16px 0;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid var(--border-gray);
+    margin: 20px 0;
+}
+
+/* Red outline box highlighting original requested element */
+.highlight-box {
+    border: 2px solid transparent;
+    padding: 4px;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+/* Layout Button actions styling */
+.card-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 32px;
 }
 
-.header-left, .header-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.gh-logo {
-    color: var(--text-main);
-}
-
-.gh-nav a {
-    color: var(--text-main);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    margin-left: 16px;
-}
-
-.gh-nav a:hover {
-    color: var(--text-muted);
-}
-
-.gh-search {
-    background-color: var(--bg-main);
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    padding: 5px 12px;
-    border-radius: 6px;
-    font-size: 14px;
-    width: 240px;
-}
-
-/* Button UI Components */
 button {
-    cursor: pointer;
     font-size: 14px;
     font-weight: 500;
-    border-radius: 6px;
-    padding: 5px 16px;
-    transition: all 0.2s ease;
-}
-
-.btn-text {
-    background: transparent;
+    padding: 10px 24px;
+    border-radius: 4px;
     border: none;
-    color: var(--text-main);
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-.btn-outline {
+.btn-cancel {
     background: transparent;
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
+    color: var(--google-blue);
 }
 
-.btn-outline:hover {
-    background-color: var(--bg-card);
+.btn-cancel:hover {
+    background-color: rgba(26, 115, 232, 0.04);
 }
 
-.btn-primary {
-    background-color: var(--btn-primary-bg);
-    border: 1px solid rgba(240,246,252,0.1);
+.btn-submit {
+    background-color: var(--google-blue);
     color: #ffffff;
 }
 
-.btn-primary:hover {
-    background-color: var(--btn-primary-hover);
+.btn-submit:hover {
+    background-color: var(--google-blue-hover);
 }
 
-.btn-secondary {
-    background-color: var(--btn-secondary-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
+/* Runaway state styles applied via JS */
+.runaway-node {
+    position: fixed !important;
+    z-index: 99999;
 }
 
-/* Hero Content */
-.gh-main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 80px 32px;
-}
-
-.hero-section h1 {
-    font-size: 56px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    background: linear-gradient(90deg, #79c0ff, #b1bac4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.hero-section p {
-    font-size: 24px;
-    color: var(--text-muted);
-    margin-bottom: 40px;
-}
-
-/* Unlocked Dashboard Area */
-.dashboard-section {
-    margin-top: 40px;
-    animation: fadeIn 0.6s ease-out forwards;
-}
-
+/* Success Card Satire Screen Layout */
 .hidden {
     display: none !important;
 }
 
-.flash-success {
-    background-color: rgba(35, 134, 54, 0.15);
-    border: 1px solid var(--btn-primary-bg);
-    color: #56d364;
-    padding: 16px;
-    border-radius: 6px;
-    margin-bottom: 24px;
-    font-weight: 600;
-}
-
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-}
-
-.card {
-    background-color: var(--bg-header);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 24px;
-}
-
-.card h3 {
+.success-icon {
+    font-size: 48px;
+    text-align: center;
     margin-bottom: 12px;
 }
 
-.card-desc {
-    color: var(--text-muted);
-    font-size: 13px;
-    margin-top: 12px;
-}
-
-.status-badge {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.status-badge.error {
-    background-color: rgba(248, 81, 73, 0.15);
-    color: #f85149;
-}
-
-.progress-bar-container {
-    background-color: var(--bg-main);
+.satirical-feed {
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-gray);
     border-radius: 6px;
-    height: 8px;
-    overflow: hidden;
-    margin-top: 8px;
-}
-
-.progress-bar-fill {
-    background-color: #db6d28;
-    height: 100%;
-}
-
-/* Runaway/Floating Cookie Consent UI */
-.cookie-banner {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--bg-header);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    width: 90%;
-    max-width: 680px;
-    padding: 24px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    z-index: 9999;
-}
-
-.cookie-content {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-}
-
-.cookie-icon {
-    font-size: 32px;
-}
-
-.cookie-text h4 {
-    font-size: 16px;
-    margin-bottom: 6px;
-}
-
-.cookie-text p {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.5;
-}
-
-.cookie-actions {
-    display: flex;
-    gap: 12px;
+    padding: 16px;
     margin-top: 16px;
-    align-self: flex-end;
 }
 
-/* Crucial style for the runaway action */
-.btn-runaway {
-    position: relative;
-    white-space: nowrap;
-    transition: left 0.1s ease, top 0.1s ease;
+.feed-item {
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.feed-item:last-child {
+    margin-bottom: 0;
+}
+
+.feed-item strong {
+    color: var(--text-dark);
+}
+
+.feed-item span {
+    color: var(--text-muted);
 }
