@@ -3,98 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in - Google Accounts</title>
+    <title>GitHub · Where software is built (and cookies are eaten)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Main Google Container Card -->
-        <div id="google-card" class="google-card">
-            <div class="logo-container">
-                <svg viewBox="0 0 24 24" width="75" height="24">
-                    <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.3 1 3.4 3.7 1.6 7.7l3.7 2.9C6.2 7.1 8.9 5 12 5z"/>
-                    <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.7-.2-2.5H12v4.7h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/>
-                    <path fill="#FBBC05" d="M5.3 14.2c-.3-.8-.4-1.6-.4-2.2 0-.6.1-1.4.4-2.2L1.6 6.9C.6 8.9 0 11.1 0 13.5s.6 4.6 1.6 6.6l3.7-2.9z"/>
-                    <path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-2.9l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.1 0-5.8-2.1-6.7-5.6L1.6 15.7C3.4 19.7 7.3 23 12 23z"/>
-                </svg>
-            </div>
-
-            <!-- STEP 1: Email Identification -->
-            <div id="step-email" class="form-step">
-                <h2>Sign in</h2>
-                <p class="subtitle">to continue to Google Account Creation</p>
-                <div class="input-group">
-                    <input type="email" id="input-email" required placeholder=" ">
-                    <label for="input-email">Email or phone</label>
-                </div>
-                <p class="guest-text">Not your computer? Use Guest mode to sign in privately.</p>
-                <div class="card-footer stage-one">
-                    <a href="#" class="form-link bold">Create account</a>
-                    <button id="btn-next" class="btn-submit">Next</button>
-                </div>
-            </div>
-
-            <!-- STEP 2: Privacy, Terms & Dev CAPTCHA -->
-            <div id="step-terms" class="form-step hidden">
-                <h2>Privacy & Terms</h2>
-                <p class="subtitle">Please complete the developer verification below to unlock the terms grid.</p>
-
-                <!-- THE DEV CAPTCHA BOX (Identical to Google layout) -->
-                <div id="captcha-box" class="captcha-box">
-                    <div class="captcha-header">
-                        <span class="captcha-instruction">Select all squares with</span>
-                        <strong id="captcha-prompt">bugs in production</strong>
-                        <span class="captcha-subinstruction">If there are none, click skip</span>
-                    </div>
-                    
-                    <div id="captcha-grid" class="captcha-grid">
-                        <!-- 9 Grid Squares populated dynamically via JS -->
-                    </div>
-
-                    <div class="captcha-footer">
-                        <div class="captcha-icons">
-                            <span title="Get new challenge">🔄</span>
-                            <span title="Audio challenge">🎧</span>
-                            <span title="Info">ℹ️</span>
-                        </div>
-                        <button id="btn-captcha-verify" class="btn-captcha">Verify</button>
-                    </div>
-                </div>
-
-                <div class="terms-container hidden" id="actual-terms-area">
-                    <p class="notice-text">Verification passed. You may now attempt to check the terms.</p>
-                    <hr class="divider">
-                    <!-- TARGET 1: The runaway checkbox wrapper -->
-                    <div id="target-checkbox-wrapper" class="checkbox-row highlight-box">
-                        <input type="checkbox" id="chk-tos">
-                        <label for="chk-tos"><strong>I agree to the Google Terms of Service</strong></label>
-                    </div>
-                    <div class="checkbox-row">
-                        <input type="checkbox" id="chk-privacy">
-                        <label for="chk-privacy">I agree to the processing of my information as described above.</label>
-                    </div>
-                </div>
-
-                <div class="card-footer">
-                    <button class="btn-cancel" onclick="window.location.reload()">Cancel</button>
-                    <!-- TARGET 2: The runaway submit button -->
-                    <button id="btn-submit" class="btn-submit">Create Account</button>
-                </div>
-            </div>
+    <!-- GitHub Top Navigation Bar -->
+    <header class="gh-header">
+        <div class="header-left">
+            <svg class="gh-logo" height="32" viewBox="0 0 16 16" width="32"><path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82A7.41 7.41 0 0 0 8 3c-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
+            <nav class="gh-nav">
+                <a href="#">Product</a>
+                <a href="#">Solutions</a>
+                <a href="#">Open Source</a>
+                <a href="#">Pricing</a>
+            </nav>
         </div>
+        <div class="header-right">
+            <input type="text" class="gh-search" placeholder="Type '/' to search...">
+            <button class="btn-text">Sign in</button>
+            <button class="btn-outline">Sign up</button>
+        </div>
+    </header>
 
-        <!-- STEP 3: Victory Dashboard -->
-        <div id="success-card" class="google-card hidden">
-            <div class="success-icon">🔒</div>
-            <h2>Account Created!</h2>
-            <p class="subtitle">Welcome to your ultimate corporate profiling experience.</p>
-            <div class="satirical-feed">
-                <div class="feed-item"><strong>Logged in as:</strong><span id="user-email-display">user@gmail.com</span></div>
-                <div class="feed-item"><strong>Captcha Status:</strong><span>Verified Level 3 Senior Human 🧠</span></div>
-                <div class="feed-item"><strong>RAM Usage:</strong><span>99.4% (Chrome opened 2 extra tabs) 💻</span></div>
+    <!-- Main Fake GitHub Content -->
+    <main class="gh-main">
+        <section class="hero-section">
+            <h1>Let's build from here</h1>
+            <p>The world's leading AI-powered developer platform.</p>
+        </section>
+
+        <!-- Hidden Interactive Feature unlocked after accepting cookies -->
+        <section id="dev-dashboard" class="dashboard-section hidden">
+            <div class="flash-success">🎉 Access Granted! You sold your soul for cookies. Welcome to your True Dashboard.</div>
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h3>Your Deployment Status</h3>
+                    <div class="status-badge error">Failed to load production</div>
+                    <p class="card-desc">Reason: Senior dev looked at the code wrong.</p>
+                </div>
+                <div class="card">
+                    <h3>Coffee to Code Converter</h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" style="width: 87%;"></div>
+                    </div>
+                    <p class="card-desc">Current Anxiety Level: 87%</p>
+                </div>
+                <div class="card">
+                    <h3>Quick Action</h3>
+                    <button class="btn-primary" onclick="alert('Blaming the intern via API... Done!')">Blame Intern</button>
+                </div>
             </div>
-            <button class="btn-submit" style="width: 100%; margin-top: 20px;" onclick="window.location.reload()">Start Over</button>
+        </section>
+    </main>
+
+    <!-- The Infinite Cookie Consent Banner -->
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            <div class="cookie-icon">🍪</div>
+            <div class="cookie-text">
+                <h4>This site offers cookies... and demands your soul</h4>
+                <p>We use essential cookies to track your typing rhythm, analyze your lack of sleep, and sell your code bugs to tech aggregators. Do you accept our terms and conditions (which are 400 pages long)?</p>
+            </div>
+            <div class="cookie-actions">
+                <button id="btn-no" class="btn-secondary btn-runaway">No, absolute not</button>
+                <button id="btn-yes" class="btn-primary">Yes, I love cookies</button>
+            </div>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
