@@ -1,41 +1,73 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const btnNo = document.getElementById('btn-no');
-    const btnYes = document.getElementById('btn-yes');
-    const cookieBanner = document.getElementById('cookie-banner');
-    const devDashboard = document.getElementById('dev-dashboard');
+    const googleCard = document.getElementById('google-card');
+    const successCard = document.getElementById('success-card');
+    const chkTos = document.getElementById('chk-tos');
+    const btnSubmit = document.getElementById('btn-submit');
+    const wrapperTos = document.getElementById('target-checkbox-wrapper');
 
-    // Função que faz o botão fugir
-    const escapeButton = (e) => {
-        if (btnNo.style.position !== 'fixed') {
-            btnNo.style.position = 'fixed';
-            btnNo.style.zIndex = '10000';
+    /**
+     * Engine helper calculating evasive position metrics inside safe zone window limits
+     */
+    const makeElementRunaway = (element) => {
+        if (!element.classList.contains('runaway-node')) {
+            // Read initial layout sizes before locking to fixed screen positions
+            const currentRect = element.getBoundingClientRect();
+            element.style.width = `${currentRect.width}px`;
+            element.style.left = `${currentRect.left}px`;
+            element.style.top = `${currentRect.top}px`;
+            element.classList.add('runaway-node');
         }
 
-        const padding = 20;
-        const maxX = window.innerWidth - btnNo.offsetWidth - padding;
-        const maxY = window.innerHeight - btnNo.offsetHeight - padding;
+        const safetyBuffer = 30;
+        const widthBound = window.innerWidth - element.offsetWidth - safetyBuffer;
+        const heightBound = window.innerHeight - element.offsetHeight - safetyBuffer;
 
-        let randomX = Math.floor(Math.random() * maxX);
-        let randomY = Math.floor(Math.random() * maxY);
+        let dynamicX = Math.floor(Math.random() * widthBound);
+        let dynamicY = Math.floor(Math.random() * heightBound);
 
-        randomX = Math.max(padding, randomX);
-        randomY = Math.max(padding, randomY);
+        // Standard validation check protecting viewport anchors
+        dynamicX = Math.max(safetyBuffer, dynamicX);
+        dynamicY = Math.max(safetyBuffer, dynamicY);
 
-        btnNo.style.left = `${randomX}px`;
-        btnNo.style.top = `${randomY}px`;
+        element.style.left = `${dynamicX}px`;
+        element.style.top = `${dynamicY}px`;
     };
 
-    // Ativa a fuga tanto no passar do mouse quanto no clique
-    btnNo.addEventListener('mouseenter', escapeButton);
-    btnNo.addEventListener('mouseover', escapeButton);
-    btnNo.addEventListener('click', (e) => {
-        e.preventDefault();
-        escapeButton();
+    // ACTION A: Make entire main layout card evade user if they try to check the boxed terms
+    wrapperTos.addEventListener('mouseenter', () => {
+        if (!chkTos.checked) {
+            makeElementRunaway(googleCard);
+        }
     });
 
-    // Evento quando clica em "Yes"
-    btnYes.addEventListener('click', () => {
-        cookieBanner.style.display = 'none';
-        devDashboard.classList.remove('hidden');
+    wrapperTos.addEventListener('click', (e) => {
+        if (!chkTos.checked) {
+            e.preventDefault();
+            makeElementRunaway(googleCard);
+        }
+    });
+
+    // ACTION B: Make submit button fly if terms are bypassed or unchecked
+    const checkButtonEvasion = (e) => {
+        if (!chkTos.checked) {
+            e.preventDefault();
+            makeElementRunaway(btnSubmit);
+        }
+    };
+
+    btnSubmit.addEventListener('mouseenter', checkButtonEvasion);
+    btnSubmit.addEventListener('mouseover', checkButtonEvasion);
+    btnSubmit.addEventListener('click', checkButtonEvasion);
+
+    // ACTION C: Handle winning state transition once click conditions are verified
+    btnSubmit.addEventListener('mouseup', () => {
+        if (chkTos.checked) {
+            googleCard.classList.add('hidden');
+            successCard.classList.remove('hidden');
+            
+            // Clean up runaway nodes transformations
+            btnSubmit.classList.remove('runaway-node');
+            googleCard.classList.remove('runaway-node');
+        }
     });
 });
