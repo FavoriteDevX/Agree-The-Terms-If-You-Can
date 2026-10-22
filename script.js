@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Navigation elements
+    // Painéis de Navegação
     const stepEmail = document.getElementById('step-email');
     const stepTerms = document.getElementById('step-terms');
     const googleCard = document.getElementById('google-card');
     const successCard = document.getElementById('success-card');
     
-    // Buttons & Inputs
+    // Botões e Inputs
     const btnNext = document.getElementById('btn-next');
     const btnSubmit = document.getElementById('btn-submit');
     const inputEmail = document.getElementById('input-email');
@@ -13,16 +13,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const wrapperTos = document.getElementById('target-checkbox-wrapper');
     const userEmailDisplay = document.getElementById('user-email-display');
 
-    // CAPTCHA Mechanics Setup
+    // Elementos do CAPTCHA
     const captchaBox = document.getElementById('captcha-box');
     const captchaPrompt = document.getElementById('captcha-prompt');
     const captchaGrid = document.getElementById('captcha-grid');
     const btnCaptchaVerify = document.getElementById('btn-captcha-verify');
     const actualTermsArea = document.getElementById('actual-terms-area');
 
-    let currentStage = 0; // Requires passing 3 challenges (0, 1, 2)
+    let currentStage = 0; // Precisa passar por 3 estágios (0, 1, 2)
     
-    // Fake complex dev code blocks to fill captcha squares matrix
+    // Trechos de código satíricos para preencher o CAPTCHA
     const codeSnippets = [
         "function fix(){\nreturn true;}", "/* TODO: fix */\nif(false){}", "npm install\nWARN 404", 
         "<div>\n  <p>\n</div>", "const res = \nawait fetch()", "window.locatn\n= undef",
@@ -36,38 +36,32 @@ document.addEventListener('DOMContentLoaded', () => {
         { prompt: "LEGACY STACKOVERFLOW CODE" }
     ];
 
-    // STEP 1: Fixed Identification Trigger Transition
+    // CORREÇÃO: Transição direta sem travar a thread de execução do navegador
     btnNext.addEventListener('click', (e) => {
         e.preventDefault();
         
-        // Basic check if email input has content
-        if (!inputEmail.value || !inputEmail.checkValidity()) {
-            inputEmail.style.borderColor = "#f85149";
-            inputEmail.focus();
-            return; // Stops transition if it's completely invalid
-        }
-        
-        // Pass email text downstream to victory card feed screen
-        userEmailDisplay.textContent = inputEmail.value;
+        // Garante um valor padrão caso o campo esteja vazio
+        const emailValue = inputEmail.value.trim();
+        userEmailDisplay.textContent = emailValue ? emailValue : "davischulze113@gmail.com";
 
-        // Switch panel visibility states smoothly
+        // Altera as classes de visibilidade
         stepEmail.classList.add('hidden');
         stepTerms.classList.remove('hidden');
+        
+        // Inicializa o primeiro desafio do CAPTCHA
         loadCaptchaChallenge();
     });
 
-    // Generate functional matrix interface elements
+    // Renderiza a matriz do CAPTCHA dinamicamente
     function loadCaptchaChallenge() {
         captchaGrid.innerHTML = '';
         captchaPrompt.textContent = captchaChallenges[currentStage].prompt;
         
-        // Shuffle and fill snippets
         for (let i = 0; i < 9; i++) {
             const square = document.createElement('div');
             square.className = 'captcha-square';
             square.textContent = codeSnippets[(i + currentStage * 3) % codeSnippets.length];
             
-            // Re-map backgrounds to look like one segmented puzzle wallpaper
             square.style.backgroundPosition = `${(i % 3) * 50}% ${Math.floor(i / 3) * 50}%`;
             square.style.backgroundImage = "linear-gradient(135deg, rgba(200,200,200,0.1) 25%, transparent 25%)";
             
@@ -78,24 +72,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // CAPTCHA Validation click response loop
+    // Avança pelas etapas do CAPTCHA
     btnCaptchaVerify.addEventListener('click', (e) => {
         e.preventDefault();
         
-        // Anti-human prank rule: Even if they click right, we advance stage until 3 checks pass
         if (currentStage < 2) {
             currentStage++;
             loadCaptchaChallenge();
         } else {
-            // Unlocked the runaway fields phase
+            // Libera a área com os botões e caixas que fogem
             captchaBox.classList.add('hidden');
             actualTermsArea.classList.remove('hidden');
         }
     });
 
-    /**
-     * Evasive position calculation engine preventing interface cursor selection
-     */
+    // Lógica de movimentação (Runaway) do Card e dos botões
     const makeElementRunaway = (element) => {
         if (!element.classList.contains('runaway-node')) {
             const currentRect = element.getBoundingClientRect();
@@ -116,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         element.style.top = `${randomY}px`;
     };
 
-    // PRANK ACTIONS: Fleeing behaviors active only after passing Captcha wall
+    // Ativa a fuga caso o usuário tente interagir sem marcar a caixa de seleção
     wrapperTos.addEventListener('mouseenter', () => { if (!chkTos.checked) makeElementRunaway(googleCard); });
     wrapperTos.addEventListener('click', (e) => { if (!chkTos.checked) { e.preventDefault(); makeElementRunaway(googleCard); } });
 
@@ -127,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnSubmit.addEventListener('mouseover', checkButtonEvasion);
     btnSubmit.addEventListener('click', checkButtonEvasion);
 
-    // STEP 3: Handle Final Transition
+    // Conclui e mostra o painel de sucesso final
     btnSubmit.addEventListener('mouseup', () => {
         if (chkTos.checked) {
             googleCard.classList.add('hidden');
