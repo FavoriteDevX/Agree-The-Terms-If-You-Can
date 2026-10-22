@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create your Google Account</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <div id="google-card" class="google-card">
+            <!-- Google Logo Icon -->
+            <div class="logo-container">
+                <svg viewBox="0 0 24 24" width="75" height="24" class="google-logo">
+                    <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.3 1 3.4 3.7 1.6 7.7l3.7 2.9C6.2 7.1 8.9 5 12 5z"/>
+                    <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.7-.2-2.5H12v4.7h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/>
+                    <path fill="#FBBC05" d="M5.3 14.2c-.3-.8-.4-1.6-.4-2.2 0-.6.1-1.4.4-2.2L1.6 6.9C.6 8.9 0 11.1 0 13.5s.6 4.6 1.6 6.6l3.7-2.9z"/>
+                    <path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-2.9l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.1 0-5.8-2.1-6.7-5.6L1.6 15.7C3.4 19.7 7.3 23 12 23z"/>
+                </svg>
+            </div>
+
+            <h2>Privacy & Terms</h2>
+            <p class="subtitle">To create a Google Account, you'll need to agree to the Terms of Service below.</p>
+
+            <!-- Terms Checklist Area mirrored from user reference image -->
+            <div class="terms-container">
+                <div class="checkbox-row">
+                    <input type="checkbox" id="chk-reminders">
+                    <label for="chk-reminders">Send me occasional reminders about these settings</label>
+                </div>
+
+                <p class="notice-text">These settings apply wherever you are signed in to your new Google Account.</p>
+
+                <hr class="divider">
+
+                <!-- TARGET 1: The runaway checkbox wrapper -->
+                <div id="target-checkbox-wrapper" class="checkbox-row highlight-box">
+                    <input type="checkbox" id="chk-tos">
+                    <label for="chk-tos"><strong>I agree to the Google Terms of Service</strong></label>
+                </div>
+
+                <div class="checkbox-row">
+                    <input type="checkbox" id="chk-privacy">
+                    <label for="chk-privacy">I agree to the processing of my information as described above and further explained in the Privacy Policy</label>
+                </div>
+            </div>
+
+            <!-- Footer Actions Layout -->
+            <div class="card-footer">
+                <button class="btn-cancel" onclick="window.location.reload()">Cancel</button>
+                <!-- TARGET 2: The runaway submit button -->
+                <button id="btn-submit" class="btn-submit">Create Account</button>
+            </div>
+        </div>
+
+        <!-- The Secret Unlocked Google Satirical Dashboard -->
+        <div id="success-card" class="google-card hidden">
+            <div class="success-icon">🔒</div>
+            <h2>Account Created!</h2>
+            <p class="subtitle">Welcome to your ultimate corporate profiling experience.</p>
+            
+            <div class="satirical-feed">
+                <div class="feed-item">
+                    <strong>Incognito Mode Status:</strong>
+                    <span>We are still watching, but in dark mode. 🕶️</span>
+                </div>
+                <div class="feed-item">
+                    <strong>RAM Usage:</strong>
+                    <span>99.4% (Chrome opened 2 extra tabs) 💻</span>
+                </div>
+                <div class="feed-item">
+                    <strong>Data Sold to Advertisers:</strong>
+                    <span>Successfully routed to 1,420 companies. 📈</span>
+                </div>
+            </div>
+            
+            <button class="btn-submit" style="width: 100%; margin-top: 20px;" onclick="window.location.reload()">Start Over</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
